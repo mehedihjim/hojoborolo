@@ -1,11 +1,23 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Upload, Image as ImageIcon, Trash2, Shuffle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useState, useEffect } from "react";
+import { Upload, Image as ImageIcon, Trash2, Shuffle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface FloatingImage {
   id: string;
@@ -15,30 +27,30 @@ interface FloatingImage {
 }
 
 const shapes = [
-  { value: 'circle', label: 'Circle' },
-  { value: 'square', label: 'Square' },
-  { value: 'rounded', label: 'Rounded Square' },
-  { value: 'hexagon', label: 'Hexagon' },
-  { value: 'star', label: 'Star' },
-  { value: 'triangle', label: 'Triangle' },
+  { value: "circle", label: "Circle" },
+  { value: "square", label: "Square" },
+  { value: "rounded", label: "Rounded Square" },
+  { value: "hexagon", label: "Hexagon" },
+  { value: "star", label: "Star" },
+  { value: "triangle", label: "Triangle" },
 ];
 
 const sizes = [
-  { value: 60, label: 'Small' },
-  { value: 100, label: 'Medium' },
-  { value: 150, label: 'Large' },
-  { value: 200, label: 'Extra Large' },
+  { value: 60, label: "Small" },
+  { value: 100, label: "Medium" },
+  { value: 150, label: "Large" },
+  { value: 200, label: "Extra Large" },
 ];
 
 export default function SyztemControl() {
-  const [backgroundImage, setBackgroundImage] = useState<string>('');
+  const [backgroundImage, setBackgroundImage] = useState<string>("");
   const [floatingImages, setFloatingImages] = useState<FloatingImage[]>([]);
-  const [animationStyle, setAnimationStyle] = useState<string>('style1');
+  const [animationStyle, setAnimationStyle] = useState<string>("style1");
 
   useEffect(() => {
-    const savedBackground = localStorage.getItem('backgroundImage');
-    const savedImages = localStorage.getItem('floatingImages');
-    const savedAnimation = localStorage.getItem('animationStyle');
+    const savedBackground = localStorage.getItem("backgroundImage");
+    const savedImages = localStorage.getItem("floatingImages");
+    const savedAnimation = localStorage.getItem("animationStyle");
 
     if (savedBackground) setBackgroundImage(savedBackground);
     if (savedImages) setFloatingImages(JSON.parse(savedImages));
@@ -52,7 +64,7 @@ export default function SyztemControl() {
       reader.onloadend = () => {
         const result = reader.result as string;
         setBackgroundImage(result);
-        localStorage.setItem('backgroundImage', result);
+        localStorage.setItem("backgroundImage", result);
       };
       reader.readAsDataURL(file);
     }
@@ -67,12 +79,12 @@ export default function SyztemControl() {
           const newImage: FloatingImage = {
             id: Date.now().toString() + Math.random(),
             src: reader.result as string,
-            shape: 'circle',
+            shape: "circle",
             size: 100,
           };
           const updatedImages = [...floatingImages, newImage];
           setFloatingImages(updatedImages);
-          localStorage.setItem('floatingImages', JSON.stringify(updatedImages));
+          localStorage.setItem("floatingImages", JSON.stringify(updatedImages));
         };
         reader.readAsDataURL(file);
       });
@@ -81,41 +93,41 @@ export default function SyztemControl() {
 
   const updateImageShape = (id: string, shape: string) => {
     const updatedImages = floatingImages.map((img) =>
-      img.id === id ? { ...img, shape } : img
+      img.id === id ? { ...img, shape } : img,
     );
     setFloatingImages(updatedImages);
-    localStorage.setItem('floatingImages', JSON.stringify(updatedImages));
+    localStorage.setItem("floatingImages", JSON.stringify(updatedImages));
   };
 
   const updateImageSize = (id: string, size: number) => {
     const updatedImages = floatingImages.map((img) =>
-      img.id === id ? { ...img, size } : img
+      img.id === id ? { ...img, size } : img,
     );
     setFloatingImages(updatedImages);
-    localStorage.setItem('floatingImages', JSON.stringify(updatedImages));
+    localStorage.setItem("floatingImages", JSON.stringify(updatedImages));
   };
 
   const deleteImage = (id: string) => {
     const updatedImages = floatingImages.filter((img) => img.id !== id);
     setFloatingImages(updatedImages);
-    localStorage.setItem('floatingImages', JSON.stringify(updatedImages));
+    localStorage.setItem("floatingImages", JSON.stringify(updatedImages));
   };
 
   const randomizeAnimation = () => {
-    const styles = ['style1', 'style2', 'style3', 'style4', 'style5'];
+    const styles = ["style1", "style2", "style3", "style4", "style5"];
     const randomStyle = styles[Math.floor(Math.random() * styles.length)];
     setAnimationStyle(randomStyle);
-    localStorage.setItem('animationStyle', randomStyle);
+    localStorage.setItem("animationStyle", randomStyle);
   };
 
   const clearAll = () => {
-    if (confirm('Are you sure you want to clear everything?')) {
-      setBackgroundImage('');
+    if (confirm("Are you sure you want to clear everything?")) {
+      setBackgroundImage("");
       setFloatingImages([]);
-      setAnimationStyle('style1');
-      localStorage.removeItem('backgroundImage');
-      localStorage.removeItem('floatingImages');
-      localStorage.removeItem('animationStyle');
+      setAnimationStyle("style1");
+      localStorage.removeItem("backgroundImage");
+      localStorage.removeItem("floatingImages");
+      localStorage.removeItem("animationStyle");
     }
   };
 
@@ -192,7 +204,10 @@ export default function SyztemControl() {
                   Randomize Movement
                 </Button>
                 <div className="text-sm text-slate-400 bg-slate-700/50 p-4 rounded-lg">
-                  Current style: <span className="text-blue-400 font-mono">{animationStyle}</span>
+                  Current style:{" "}
+                  <span className="text-blue-400 font-mono">
+                    {animationStyle}
+                  </span>
                 </div>
                 <Button
                   onClick={clearAll}
@@ -233,7 +248,9 @@ export default function SyztemControl() {
               >
                 <div className="flex flex-col items-center gap-2 text-slate-400">
                   <Upload className="w-8 h-8" />
-                  <span className="text-sm">Upload Floating Images (Multiple)</span>
+                  <span className="text-sm">
+                    Upload Floating Images (Multiple)
+                  </span>
                 </div>
               </Label>
             </div>
@@ -257,7 +274,9 @@ export default function SyztemControl() {
                         </Label>
                         <Select
                           value={img.shape}
-                          onValueChange={(value) => updateImageShape(img.id, value)}
+                          onValueChange={(value) =>
+                            updateImageShape(img.id, value)
+                          }
                         >
                           <SelectTrigger className="bg-slate-600 border-slate-500 text-white">
                             <SelectValue />
@@ -321,6 +340,7 @@ export default function SyztemControl() {
           <a
             href="/"
             className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+            target="_blank"
           >
             Back to Dungeon
           </a>

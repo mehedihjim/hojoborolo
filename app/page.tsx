@@ -47,7 +47,7 @@ export default function Home() {
     e.preventDefault();
     e.stopPropagation();
 
-    await navigator.clipboard.writeText("/syztem-control");
+    await navigator.clipboard.writeText("syztem-control");
     toast({
       title: "Copied!",
       description: "Secret path copied to clipboard",
