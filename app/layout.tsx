@@ -1,25 +1,25 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Toaster } from '@/components/ui/toaster';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'The Dungeon',
-  description: 'Enter if you dare',
+  title: "The Hojoborolo Dungeon",
+  description: "Enter if you dare",
   openGraph: {
     images: [
       {
-        url: 'https://bolt.new/static/og_default.png',
+        url: "https://bolt.new/static/og_default.png",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     images: [
       {
-        url: 'https://bolt.new/static/og_default.png',
+        url: "https://bolt.new/static/og_default.png",
       },
     ],
   },
